@@ -1,0 +1,36 @@
+﻿@model Projekt.Models.GueastResponse
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="~/Content/Site.css"/>
+    <title>RsvpForm</title>
+</head>
+<body>
+    <button>Pokaz cycki</button>
+    <div>
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary()
+            <p><h1>blablabla</h1>Imię i nazwisko: @Html.TextBoxFor(x => x.Name)</p>
+            <p>Twój email: @Html.TextBoxFor(x => x.Email)</p>
+            <p>Twój telefon: @Html.TextBoxFor(x => x.Phone)</p>
+            <p>
+                Czy jesteś zainteresowany wypożyczeniem auta?
+                @Html.DropDownListFor(x => x.WillAttend, new[]
+       {
+           new SelectListItem() {Text = "Tak jestem", Value = bool.TrueString},
+           new SelectListItem() {Text = "Nie, ale szukam ciekawych ofert.", Value = bool.FalseString}
+       }, "Wybierz opcję"
+       )
+            </p>
+            <input type="submit" value="Wyślij RSVP" />
+        }
+    </div>
+</body>
+</html>

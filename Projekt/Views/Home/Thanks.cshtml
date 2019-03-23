@@ -1,0 +1,43 @@
+﻿@model Projekt.Models.GueastResponse
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Thanks</title>
+</head>
+<body>
+    @{ 
+        try
+        {
+            WebMail.SmtpServer = "franek4132@gmail.com";
+            WebMail.SmtpPort = 587;
+            WebMail.EnableSsl = true;
+            WebMail.UserName = "razor321";
+            WebMail.Password = "admin";
+            WebMail.From = "webmastering1997@gmail.com";
+
+            WebMail.Send("franek4132@gmail.com", "Powiadomienie RSVP", Model.Name + ((Model.WillAttend ?? false) ? "" : "nie") + "przyjdzie");
+        }
+        catch(Exception)
+        {
+            @:<b>Przepraszamy - nie możemy wysłać wiadomości RSVP.</b>
+        }
+    }
+    <div> 
+        <h1>Dziękujemy, @Model.Name!</h1>
+        @if (Model.WillAttend == true)
+        {
+            @:Cieszymy się, że zainteresowałeś się naszą ofertą
+        }
+        else
+        {
+            @:Zapraszamy następnym razem
+        }
+    </div>
+</body>
+</html>
